@@ -4,6 +4,21 @@ import './App.css';
 
 class App extends Component {
 
+  // lifecycle method steps
+
+  constructor(props){
+    super(props);
+    console.log("constructor");
+  }
+
+  componentWillMount(){ //dont use it at often it wont trigger rerender
+    console.log("willmount");
+  }
+
+  componentDidMount(){//state will change and call rerender
+    console.log('mounted');
+  }
+  //
   state = {
     toggle: true
   }
