@@ -3,23 +3,24 @@ import logo from './logo.svg';
 import './App.css';
 import Movie from './Movie';
 
-const movies = [
-  {
-    id: 1,
-    title: 'Start Wars'
-  },
-  {
-    id: 2,
-    title: 'Spider man'
-  },
-  {
-    id: 3,
-    title: '36th Camber of shaloin'
-  }
-];
 
 class App extends Component {
+  state = {
+    movies: []
+  }
 
+  async componentDidMount(){
+    try{
+      const res = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=883fa5a00cd1929226900d5fc30aed4f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1');
+      const movies = await res.json();
+      this.setState({
+        movies: movies.results
+
+      })
+    }catch(e){
+      console.log(e);
+    }
+  }
   render() {
     return (
       <div className="App">
@@ -27,9 +28,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
         </header>  
 
-        {/* iteration  */}
-        {movies.map((movie) =>  <Movie key={movie.id} movie ={movie}/>)}   
-      {/* iteration  */}
+        {this.state.movies.map(movie =>  <Movie key={movie.id} movie={movie} />)}
       </div>
     );
   }
