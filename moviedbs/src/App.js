@@ -16,7 +16,7 @@ class App extends Component {
         movies: movies.results,
       });
     } catch (e) {
-      console.log(e);
+      console.log(e); // eslint-disable-line
     }
   }
 
